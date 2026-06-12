@@ -191,22 +191,6 @@ def random():
         cursor.execute('SELECT * FROM tracks ORDER BY RANDOM() LIMIT 100')
         return db_to_dictslist(cursor.fetchall())
 
-# @app.route('/download')
-# @login_required
-# def download():
-#     filename = request.args.get('filename')
-#     if filename:
-#         if filename in os.listdir('download'):
-#             return send_file('download/' + filename, as_attachment=True)
-#         return 'no file('
-#     with open('download/files.json', encoding='utf-8') as file:
-#         s = json.load(file)
-#     html = ''
-#     for i in s:
-#         html += f'<a href="/download?filename={i}">{i}</a> - {s[i]}<br>\n'
-
-#     return html
-
 @app.route('/favicon.ico')
 def fav():
     return send_file('favicon.png')
