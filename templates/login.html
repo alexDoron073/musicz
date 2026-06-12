@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Z login</title>
+    <style>
+        body {
+            background-color: rgb(34, 34, 34);
+            font-family: 'Franklin Gothic Medium';
+            font-weight: bold;
+        }
+
+        .maincontainer {
+            position: absolute;
+            top: 50%; 
+            left: 50%; 
+            transform: translate(-50%, -50%);
+            width: 300px;
+            background-color: rgb(43, 43, 43);
+            border-radius: 30px;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        input {
+            color: white;
+            padding: 15px;
+            font-family: inherit;
+            font-weight: inherit;
+            font-size: 20px;
+            border: 0px;
+            outline: none;
+            background-color: rgb(53, 53, 53);
+            border-radius: 15px;
+            transition: 0.5s;
+        }
+        
+        input:hover {
+            background-color: rgb(130, 130, 130);
+        }
+    </style>
+</head>
+<body>
+    <div class="maincontainer">
+        <form method="post">
+            <input name="username" placeholder="Username">
+            <input name="password" placeholder="Password" type="password">
+            <input type="submit" value="Login">
+        </form>
+        <form action="/reg">
+            <input type="submit" value="Sign in">
+        </form>
+    </div>
+</body>
+</html>

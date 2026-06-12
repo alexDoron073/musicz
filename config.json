@@ -1,0 +1,12 @@
+{
+    "debug": false,
+    "logs": false,
+    "port": 8080,
+    "db": {
+        "host": "",
+        "port": 5432,
+        "database": "musicz",
+        "user": "",
+        "password": ""
+    }
+}

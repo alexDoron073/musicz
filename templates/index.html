@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Z</title>
+    <script src="static/qwebchannel.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <script src="static/socket.io.min.js"></script>
+    <script type="text/javascript" src="/static/script.js"></script>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+    <div id="topspacer" style="height: 60px;"></div>
+    <div id="main">
+        <div id="mymusic">
+
+        </div>
+        <div id="randsel">
+
+        </div>
+    </div>
+    <div id="right" class="right">
+        <div id="accmenu" class="accmenu hide">
+            <a href="/logout">Logout</a>
+        </div>
+        <div id="tracklistdiv" class="hide">
+
+        </div>
+    </div>
+
+    <div id="search">
+        <div id="local" class="hide">
+            <div id="localsearch">
+            </div>
+        </div>
+        <div id="global" class="hide">
+            <div id="globalsearch">
+            </div>
+        </div>
+    </div>
+    <div id="bottomspacer" style="height: 100px;"></div>
+
+    <div id="toper" class="toper">
+        <div id="playlistbtns">
+            <div id="mainpagebtn" class="mainpagebtn" style="background-image: url('/static/imgs/placeholder.png')"
+                onclick="mainpage()"></div>
+            <div class="searchbar">
+                <img src="static/imgs/lupa.png" alt="" width="40px" height="40px">
+                <input id="searchinput" class="searchinput" placeholder="Search">
+                <button id="xbtn" class="xbtn hide" onclick="searchinput.value = ''; search('')">X</button>
+            </div>
+            <div id="accbtn" class="accbtn" onclick="openaccmenu()"></div>
+        </div>
+    </div>
+
+    <div id="playerwindow" class="playerwindow hide">
+        <div id="blured" class="bg"></div>
+
+        <div class="playercontent">
+            <div id="songpic" class="songpic"></div>
+
+            <div class="playercontrols">
+                <div id="songname" class="songname"></div>
+                <div id="songartist" class="songartist"></div>
+                <div id="timelinecontainer" class="timeline-container">
+                    <span id="curtime">0:00</span>
+                    <input class="timeline nomaxi" id="timeline" type="range">
+                    <span id="remtime">-0:00</span>
+                </div>
+                <div id="playerbtns" class="playerbtns">
+                    <div></div>
+                    <div onclick="playprev()" class="nomaxi" style="background-image: url('static/imgs/prev.png');">
+                    </div>
+                    <div onclick="togglepause()" class="nomaxi" style="background-image: url('static/imgs/play.png');"
+                        id="pausebtn"></div>
+                    <div onclick="playnext()" class="nomaxi" style="background-image: url('static/imgs/next.png');">
+                    </div>
+                    <div onclick="opentrackmenu(userdata.current_playing.playlist[userdata.current_playing.track_index], true)"
+                        class="nomaxi playertrackmenubtn"></div>
+                </div>
+            </div>
+
+            <div id="playerbtmbtns" class="playerbtmbtns">
+                <div id="repeatbtn" class="repeat nomaxi" onclick="repeat()">🔁</div>
+                <div id="volumecontrol" class="volume-control">
+                    <span class="nomaxi" id="volumeicon" onclick="player.muted = !player.muted" style="user-select: none;">🔊</span>
+                    <input class="nomaxi" type="range" id="volume" min="0" max="1" step="0.01" style="width: 100px;">
+                </div>
+            </div>
+        </div>
+
+        <div id="miniplayer" class="miniplayer">
+            <div id="minisongpic" class="mini-songpic"></div>
+            <div id="minisonginfo" class="mini-songinfo">
+                <div id="minisongname" class="mini-songname"></div>
+                <div id="minisongartist" class="mini-songartist"></div>
+            </div>
+            <div id="miniplayerbtns" class="playerbtns" style="gap: 0px">
+                <div onclick="playprev()" class="nomaxi" style="background-image: url('static/imgs/prev.png');"></div>
+                <div onclick="togglepause()" class="nomaxi" style="background-image: url('static/imgs/play.png');"
+                    id="minipausebtn"></div>
+                <div onclick="playnext()" class="nomaxi" style="background-image: url('static/imgs/next.png');"></div>
+            </div>
+        </div>
+    </div>
+    <div id="black" class="black" onclick="unblack()"></div>
+    <div id="trackmenu" class="trackmenu" data-track>
+
+    </div>
+
+    <audio id="player" style="width: 100%;" src=""></audio>
+</body>
+
+</html>

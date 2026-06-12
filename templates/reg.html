@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Z sign in</title>
+    <style>
+        body {
+            background-color: rgb(34, 34, 34);
+            font-family: 'Franklin Gothic Medium';
+            font-weight: bold;
+        }
+
+        .maincontainer {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            background-color: rgb(43, 43, 43);
+            border-radius: 30px;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        input {
+            color: white;
+            padding: 15px;
+            font-family: inherit;
+            font-weight: inherit;
+            font-size: 20px;
+            border: 0px;
+            outline: none;
+            background-color: rgb(53, 53, 53);
+            border-radius: 15px;
+            transition: 0.5s;
+        }
+
+        input:hover {
+            background-color: rgb(130, 130, 130);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="maincontainer">
+        <input id="username" placeholder="Username" required>
+        <input id="password" placeholder="Password" type="password" required>
+        <input id="passwordconf" placeholder="Password again" type="password" required>
+        <input id="submit" type="submit" value="Sign in" onclick="reg()">
+        <form action="/login">
+            <input type="submit" value="Back">
+        </form>
+    </div>
+
+    <script>
+        usernamevalid = false
+        passwordvalid = false
+
+        username.addEventListener('blur', (e) => {
+            if (username.value.length > 4) usernamevalid = true
+            else usernamevalid = false
+        })
+
+        passwordconf.addEventListener('blur', (e) => {
+            if (password.value.length > 0 && password.value == passwordconf.value) passwordvalid = true
+            else passwordvalid = false
+        })
+
+        password.addEventListener('blur', (e) => {
+            if (passwordconf.value.length > 0 && password.value == passwordconf.value) passwordvalid = true
+            else passwordvalid = false
+        })
+
+        function reg() {
+            if (usernamevalid && passwordvalid) {
+                fetch('reg', {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        'username': username.value,
+                        'password': password.value,
+                    })
+                })
+                .then(response => { return response.json() }).then(data => {
+                    if (data.msg =='ok') window.location.href = window.location.origin
+                    else alert('Username is already taken')
+                })
+            }
+            else {
+                if (!usernamevalid) alert('Username length must be 5+ symbols')
+                else if (password.value.length == 0) alert('Password is empty')
+                else if (!passwordvalid) alert('Passwords don\'t match')
+            }
+        }
+    </script>
+</body>
+
+</html>
